@@ -1,0 +1,12 @@
+{
+	"url_test": "http://203.156.198.118:9002/router_manage",
+	"url": "http://admin.17ce.com:9002/router_manage",
+	"user": "yiqice@qq.com",
+	"thread_count": 10,
+	"task_ttl": 60,
+	"valid_time_out": 5,
+	"valid_ttl": 30,
+	"valid_ok_count": 2,
+	"valid_urls_c": "http://www.sina.com.cn/,https://www.baidu.com/,http://www.qq.com/",
+	"valid_urls_f": "https://www.yahoo.com/,http://edition.cnn.com/,https://facebook.com/"
+}

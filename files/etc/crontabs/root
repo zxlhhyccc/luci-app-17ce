@@ -1,0 +1,2 @@
+*/10 * * * * /usr/share/17ce/monitor.sh > /var/log/monitor.log 2>&1
+*/12 * * * * /etc/init.d/17ce restart > /var/log/init_d_17ce.log 2>&1

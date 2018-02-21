@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cat > /etc/config/17ceclient <<EOF
+config 17ceclient 17ceclient
+	option username feilianos@qq.com
+EOF
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@17ceclient[-1]
+	add ucitrack 17ceclient
+	set ucitrack.@17ceclient[-1].init=17ce
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

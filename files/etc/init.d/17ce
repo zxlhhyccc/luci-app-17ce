@@ -1,0 +1,27 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2017  www.17ce.com
+START=99
+
+init_conf()
+{
+	config_load '17ceclient'
+	config_get username 17ceclient username
+
+	if [ ! -f "/tmp/lib/libstdc++.so.6" ]; then
+		wget -O /tmp/lib/libstdc++.so.6 http://www.17ce.com/soft/route/files/libstdc++.so.6.0.21;
+	fi
+}
+
+start()
+{
+	init_conf
+	/usr/share/17ce/17ce_v3 -u $username
+	echo "17ce Client has started."
+}
+
+stop()
+{
+	killall -9 17ce_v3
+	sleep 1
+	echo "17ce Client has stoped."
+}
