@@ -1,4 +1,4 @@
-# ★luci-app-17ce(OPENWRT/LEDE:网站测速赚钱插件)
+# ★luci-app-17ce(OPENWRT/LEDE：网站测速赚钱插件)
 # ★插件制作BY大飞
 
 # ★版本：3.0.11
