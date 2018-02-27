@@ -1,6 +1,6 @@
 # ★luci-app-17ce(OPENWRT/LEDE：网站测速赚钱插件)
 
-# ★官方旗下网站：[云计算赚钱](https://www.yiluzhuanqian.com/P3VpZD0xMDEwOA%3D%3D)
+# ★官方网站：[云计算赚钱](https://www.yiluzhuanqian.com/P3VpZD0xMDEwOA%3D%3D)
 
 # ★插件制作BY大飞
 
