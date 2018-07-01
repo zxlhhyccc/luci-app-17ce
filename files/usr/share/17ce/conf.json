@@ -1,12 +1,15 @@
 {
-	"url_test": "http://203.156.198.118:9002/router_manage",
-	"url": "http://admin.17ce.com:9002/router_manage",
+	"url2": "http://203.156.197.29:8000/admin",
+	"url": "http://admin.17ce.com:8000/admin",
 	"user": "yiqice@qq.com",
-	"thread_count": 10,
+	"client_type":"router",
+	"rt_thread_count": 10,
+	"cycle_thread_count": 10,
 	"task_ttl": 60,
 	"valid_time_out": 5,
-	"valid_ttl": 30,
+	"valid_ttl": 300,
 	"valid_ok_count": 2,
 	"valid_urls_c": "http://www.sina.com.cn/,https://www.baidu.com/,http://www.qq.com/",
-	"valid_urls_f": "https://www.yahoo.com/,http://edition.cnn.com/,https://facebook.com/"
+	"valid_urls_f": "https://www.yahoo.com/,http://edition.cnn.com/,https://facebook.com/",
+	"http_error_check": false
 }

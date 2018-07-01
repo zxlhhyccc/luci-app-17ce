@@ -1,6 +1,7 @@
 #!/bin/sh
 cd /usr/share/17ce || cd /root/17ce
 rm -f update.tgz
+./17ce_v3 -v || wget -O /usr/lib/libmbedtls.so.9 http://www.17ce.com/soft/route/files/14.07/libmbedtls.so.9
 ./17ce_v3 -v || wget -O /usr/lib/libpolarssl.so.7 http://www.17ce.com/soft/route/files/14.07/libpolarssl.so.1.3.9
 PID=`pidof 17ce_v3`
 echo "pid: $PID"
@@ -36,7 +37,43 @@ TURL=`echo $TEMPSTR|awk '{print $2}'`
 if echo "$TURL" |grep -q "http"
 then
 	echo "get version:$TVER, get update url:$TURL"
-	if [ "x$VERSION" != "x$TVER" ]; then
+	#版本号第1位
+	v1_1=`echo $VERSION|awk -F . '{print $1}'`
+	v2_1=`echo $TVER|awk -F . '{print $1}'`
+	#版本号第2位
+	v1_2=`echo $VERSION|awk -F . '{print $2}'`
+	v2_2=`echo $TVER|awk -F . '{print $2}'`
+	#版本号第3位
+	v1_3=`echo $VERSION|awk -F . '{print $3}'`
+	v2_3=`echo $TVER|awk -F . '{print $3}'`
+
+	UPFLAG=0
+	#第1位判断
+	if [ $v1_1 -gt  $v2_1 ];then
+		UPFLAG=0
+	#第1位相等
+	elif [ $v1_1 -eq $v2_1 ];then
+		#第2位判断
+		if [ $v1_2 -gt  $v2_2 ];then
+			UPFLAG=0
+		#第2位相等
+		elif [ $v1_2 -eq $v2_2 ];then
+			#第3位判断
+			if [ $v1_3 -ge  $v2_3 ];then
+				UPFLAG=0
+			else
+				UPFLAG=1
+			fi
+		else
+			UPFLAG=1
+		fi
+	else
+		UPFLAG=1
+	fi
+
+	# echo "$VERSION $TVER $UPFLAG"
+	if [ "$UPFLAG" != "0" ]; then
+	# if [ "x$VERSION" != "x$TVER" ]; then
 		echo "updating..."
 		cd /tmp/
 		if curl -o /tmp/update.tgz -k -m 60 $TURL || wget -O /tmp/update.tgz $TURL
