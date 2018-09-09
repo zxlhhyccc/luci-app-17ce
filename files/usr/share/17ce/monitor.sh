@@ -3,23 +3,36 @@ cd /usr/share/17ce || cd /root/17ce
 rm -f update.tgz
 ./17ce_v3 -v || wget -O /usr/lib/libmbedtls.so.9 http://www.17ce.com/soft/route/files/14.07/libmbedtls.so.9
 ./17ce_v3 -v || wget -O /usr/lib/libpolarssl.so.7 http://www.17ce.com/soft/route/files/14.07/libpolarssl.so.1.3.9
+
+if [ -f "user" ]; then
+  NAME=`cat ./user`
+fi
+
+if [ ! -n "$NAME" ]; then
+  NAME="yiqice@qq.com"
+fi
+echo "name: $NAME"
+
 PID=`pidof 17ce_v3`
 echo "pid: $PID"
 if [ "x$PID" = 'x' ]; then
 	echo "process die"
 	/etc/init.d/17ce* start
+	./17ce_v3 -u $NAME
 else
 	echo "process ok"
 	MEM=`ps|grep 17ce_v3|grep -v grep|awk '{print $3}'`
 	if [ "$MEM" -gt 35000 ]; then
 		echo "mem out: $MEM"
 		/etc/init.d/17ce* restart
+		./17ce_v3 -u $NAME
 	else
 		echo "mem ok"
 		LOGSIZE=`ls 17ce_v3.log  -l| awk '{print $5}'`
 		if [ "$LOGSIZE" -gt 1000000 ]; then
 			echo "log size out: $MEM"
 			/etc/init.d/17ce* restart
+			./17ce_v3 -u $NAME
 		else
 			echo "log size ok"
 		fi
@@ -85,6 +98,7 @@ then
 			rm -f 17ce_v3 monitor.sh 17ce_v3.log
 			tar zxf /tmp/update.tgz
 			/etc/init.d/17ce* start
+			./17ce_v3 -u $NAME
 			echo "update ok"
 		else
 			echo "download failed"
